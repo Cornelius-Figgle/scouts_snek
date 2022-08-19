@@ -1,12 +1,24 @@
 from inspect import stack
 from msvcrt import getwch, getwche
+from os import name, system
 from random import choice
 from threading import Thread
+from time import sleep as timesleep
 from time import time
 
-from qol_mth import checkEven, clearConsole, sleep
-
 #________________________________________________________________________________________________________________________________
+
+clearConsole = lambda: system('cls' if name in ('nt', 'dos') else 'clear') #copied this from here, thanks: https://www.delftstack.com/howto/python/python-clear-console/
+
+def sleep(milliseconds):
+    try: seconds = int(milliseconds) / 1000
+    except: return 'Error'
+    timesleep(seconds)
+
+
+def checkEven(num):
+    if int(num) % 2 == 0: return True
+    else: return False
 
 def moveChoice():
     global borderHit
